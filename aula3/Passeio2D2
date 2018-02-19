@@ -1,0 +1,45 @@
+//passeio aleatorio 2d
+clear
+M = 100000; //transições
+LI = 0; //limite inicial
+LF = 100; //limite maximo
+Y = zeros(1,M);
+X = zeros(1,M);
+
+Y(1) = LF/2; //coordenada inicial no eixo Y
+X(1) = LF/2; //coordenada inicial no eixo X
+
+//laço para as transições
+for i=2:M 
+    y = Y(i-1); x=X(i-1); //repassando as coordenada para variaveis auxiliares
+    r = rand(1,1); //sorteio
+    if r<=0.25 //probabilidade do agente ir para esquerda
+        x = x -1;
+        elseif r>0.25 & r<=0.50 //probabilidade do agente ir para cima
+            y = y+1;
+            elseif r>0.50 & r<=0.75 //probabilidade do agente ir para direita
+                x = x+1;
+                elseif r>0.75 & r<=1 //probabilidade do agente ir para baixo
+                    y = y-1;
+    end
+    //testando limites
+    if y==LI-1
+        y = y+1;
+        elseif y==LF+1
+            y=y-1;
+            elseif x==LI-1
+                x=x+1;
+                elseif x==LF+1
+                    x=x-1;
+    end
+    Y(i) = y; X(i) = x; //passando novas coordenadas para a Matriz principal de coordenadas
+end
+
+figure
+plot2d(X, Y, rect=[LI LI LF LF]);
+title('Passeio Aleatorio');
+xlabel('x');
+ylabel('y');
+legend('Bebado');
+    
+//calculo do potencial usando paseio aleatorio

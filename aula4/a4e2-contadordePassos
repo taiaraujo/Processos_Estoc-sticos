@@ -1,0 +1,41 @@
+//passeio aleatorio 2d
+//recoente
+clear
+LI = 0; //limite inicial
+LF = 100; //limite maximo
+X0 = LF/2; Y0 = LF/2; //ponto de partida
+x = X0;
+y = Y0;
+A = 0; //auxiliar
+B = 0; //auxiliar
+K = 0; //contadode de passos
+
+while ~(A==X0 & B==Y0)
+    r = rand(1,1);
+    if r<=0.25
+        x = x -1;
+        elseif r>0.25 & r<=0.50
+            y = y+1;
+            elseif r>0.50 & r<=0.75
+                x = x+1;
+                elseif r>0.75 & r<=1
+                    y = y-1;
+    end
+    //testando limites
+    if y==LI-1
+        y = y+1;
+        elseif y==LF+1
+            y=y-1;
+            elseif x==LI-1
+                x=x+1;
+                elseif x==LF+1
+                    x=x-1;
+    end
+    A = x; 
+    B = y;
+    K = K + 1;
+end
+K
+//calculo do potencial usando paseio aleatorio
+//ramificação
+//matriz do capacitor

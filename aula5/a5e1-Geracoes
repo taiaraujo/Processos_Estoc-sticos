@@ -1,0 +1,26 @@
+//ramificação
+//geração de descendentes
+clear
+N = 20; //geração limite
+G(1:N) = 0;
+P = [0.25 0.5 0.75 1]; //probabilidade de descendentes
+K = [0 1 2 3]; //Numero de descendentes
+g=1; //original
+n=0; // contador de geração
+    while (g~=0) & (n<N)
+        Z=0; //descendentes por geração
+        for i=1:g
+             r = rand(1,1);
+             c = 1;
+            while r>P(c)
+                c = c+1;
+            end
+            Z = Z + K(c);
+        end
+        g = Z;
+        n = n+1;
+        G(n) = g;
+    end
+    
+    figure
+    plot2d(G)

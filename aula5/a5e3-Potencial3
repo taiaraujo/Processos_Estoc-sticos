@@ -1,0 +1,72 @@
+//movimento Browniano 2D
+//calculo de potencial
+clear
+//matriz 
+L = 99;
+M = zeros(L,L);
+x1=50;
+y1=1;
+x2=50;
+y2=99;
+
+for i=1:99
+    for j=1:99
+        R1 = sqrt((i-x1)^2 + (j-y1)^2);
+        R2 = sqrt((i-x2)^2 + (j-y2)^2);
+        if (R1 < 25) & (R1 > 20)
+            M(i,j) = -1;
+        end
+        if (R2 < 25) & (R2 > 20)
+            M(i,j) = 1;
+        end
+    end
+end
+
+LI = 1;
+LF = 99;
+
+//ponto de medida
+X0 = 50;
+Y0 = 50;
+P = [0.25 0.5 0.75 1];      //direção
+passeios = 20;              //quantidade de passeios
+tamanho(1:passeios) = 0;    //tamanho do passeio
+potencial(1:passeios) = 0;  //valor do potencial no fim do passeio
+
+//executa até o número de passeios
+for i=1:passeios
+    //reinicia o ponto de partida para cada passeio
+    x = X0;
+    y = Y0;
+    K = 0; //inicia o contador
+    U0 = M(x,y); //ponto de partida
+    while (U0==0) 
+        //passeio 2D
+            r = rand(1,1);
+            if r<=0.25
+                x = x -1;
+                elseif r>0.25 & r<=0.50
+                    y = y+1;
+                    elseif r>0.50 & r<=0.75
+                        x = x+1;
+                            elseif r>0.75 & r<=1
+                                y = y-1;
+            end
+            //testando limites
+            if y==LI
+                y = y+1;
+                elseif y==LF
+                    y=y-1;
+                    elseif x==LI
+                        x=x+1;
+                        elseif x==LF
+                        x=x-1;
+            end
+        K = K+1;     //altera tamanho do passeio
+        U0 = M(x,y); //potencial na nova posição(x,y)
+    end
+    tamanho(i) = K; //tamanho do passeio
+    potencial(i) = U0;  //potencial no fim do passeio
+end
+MAX = max(tamanho);
+U = sum(tamanho.*potencial)/(MAX*passeios);

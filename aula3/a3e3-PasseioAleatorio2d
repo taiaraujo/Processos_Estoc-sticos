@@ -1,0 +1,72 @@
+//passeio aleatorio 2d
+//Natália Araújo
+clear
+M = 100; //transições
+Ymax = 10; //limite
+Xmax = 10; //limite
+Y = zeros(1,M);
+X = zeros(1,M);
+a = 0.25; //esquerda
+b = 0.50; //cima
+c = 0.75; //direita
+d = 1; //baixo
+
+Y(1) = 5;
+X(1) = 5;
+ 
+for i=1:M-1
+    y = Y(i);
+    x = X(i);
+    //conferir se estão nos limites maximos
+    if x==Xmax & y==Ymax;
+        l = rand(1,1);
+        if l>0.5
+        x = x-1;
+        else
+        y = y-1;
+        end
+    elseif x==Xmax
+        x = x-1;
+    elseif y == Ymax;
+        y = y-1;
+    end
+   //conferir se estão nos limites minimo
+    if x==0 & y==0;
+        l = rand(1,1);
+        if l>0.5
+        x = x+1;
+        else
+        y = y+1;
+        end
+    elseif x==0
+        x = x+1;
+    elseif y == 0;
+        y = y+1;
+    end
+    //proxima posição
+    r = rand(1,1);
+    //esquerda
+    if r<= a
+        x = x-1;
+    //cima
+    elseif r>a & r<=b
+        y = y+1;
+    //direita
+    elseif r>b & r<=c
+        x = x+1;
+    //baixo
+    elseif r>c & r<=d
+        y = y-1;
+    end
+    //passando os parametros
+    Y(i+1) = y;
+    X(i+1) = x;
+end
+
+figure
+plot2d(X, Y);
+title('Passeio Aleatorio');
+xlabel('x');
+ylabel('y');
+legend('Bebado');
+//set(gca(), "grid", [1 1]);

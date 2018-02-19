@@ -1,0 +1,26 @@
+//movimento Browniano 2D
+//calculo de potencial
+//definição da matriz
+
+clear
+L = 99;
+M = zeros(L,L);
+x1=50;
+y1=1;
+x2=50;
+y2=99;
+
+for i=1:99
+    for j=1:99
+        R1 = sqrt((i-x1)^2 + (j-y1)^2);
+        R2 = sqrt((i-x2)^2 + (j-y2)^2);
+        if (R1 < 25) & (R1 > 20)
+            M(i,j) = -1;
+        end
+        if (R2 < 25) & (R2 > 20)
+            M(i,j) = 1;
+        end
+    end
+end
+
+surf (M)

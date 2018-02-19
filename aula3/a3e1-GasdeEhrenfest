@@ -1,0 +1,27 @@
+//O gás de Ehrenfest
+//Cadeia de Markov
+clear
+N = 50000; //população em A
+K = 0; // população em B
+M = 500000; // transições
+P = zeros(1,M);
+X = zeros(1,M);
+
+for i=1:M
+	P(i) = (N-K)/N;
+	r = rand(1,1);
+	if r<P(i)
+		K = K + 1;
+	else
+		K = K - 1;
+	end
+	X(i) = K;
+end
+
+figure
+plot2d(X)
+title('Variação da população')
+
+figure
+plot2d(P)
+title('Variação da probabilidade')
